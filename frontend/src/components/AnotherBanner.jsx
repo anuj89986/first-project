@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import SignUp from '../pages/signUp'
 import { AuthContext } from '../context/AuthContext'
 
 const AnotherBanner = ({toScroll}) => {
