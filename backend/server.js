@@ -14,8 +14,10 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: ['http://localhost:5173','http://localhost:5174'],
+    origin: ['http://localhost:5173','http://localhost:5174',"https://care-plus-user.netlify.app/","https://care-plus-staff.netlify.app/"],
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
 app.use(express.json());
