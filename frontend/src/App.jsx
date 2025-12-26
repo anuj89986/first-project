@@ -11,7 +11,7 @@ import MyProfile from "./pages/MyProfile.jsx";
 import Login from "./pages/Login.jsx";
 import Footer from "./components/Footer.jsx";
 import { AppContext } from "./context/AppContext.js";
-import SignUp from "./pages/signUp.jsx";
+import SignUp from "./pages/SignUp.jsx";
 import { AuthContext } from "./context/AuthContext.js";
 import API from "../config/API.js";
 import Report from "./pages/Report.jsx";
