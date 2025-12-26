@@ -28,6 +28,9 @@ const Login = () => {
       alert(error.response?.data?.message || "login failed");
     }
   };
+  const redirectToOtherSite = () => {
+  window.location.href = import.meta.env.VITE_REDIRECT_URL;
+};
 
   return (
     <form
@@ -79,6 +82,16 @@ const Login = () => {
           >
             Sign Up Here
           </Link>
+        </div>
+
+        <div className="mt-6 pt-6 border-t border-gray-200">
+          <p className="text-gray-700 text-sm font-medium mb-3">Admin or Doctor?</p>
+          <button
+            onClick={redirectToOtherSite}
+            className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg transition duration-200 text-sm"
+          >
+            Go to Dashboard
+          </button>
         </div>
       </div>
     </form>
