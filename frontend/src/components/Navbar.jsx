@@ -3,6 +3,7 @@ import Logo from "./Logo.jsx";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import API from "../../config/API.js";
 import { AuthContext } from "../context/AuthContext.js";
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -17,10 +18,10 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await API.post("/logout");
-      alert("Logout Successful");
+      toast.success("Logout Successful");
       setUser(null);
     } catch (error) {
-      alert("Logout failed");
+      toast.error("Logout failed");
     }
   };
 
@@ -34,7 +35,6 @@ const Navbar = () => {
       <nav className="sticky top-0 z-50 bg-[#d4eded]/95 border-b-2 border-gray-300 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             <NavLink to="/" className="flex">
               <Logo />
             </NavLink>

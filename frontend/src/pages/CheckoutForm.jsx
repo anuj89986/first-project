@@ -2,6 +2,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import API from "../../config/API.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
 const CheckoutForm = ({ appointmentId, fees }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -21,10 +22,11 @@ const CheckoutForm = ({ appointmentId, fees }) => {
       });
 
       if (result.error) {
-        alert(result.error.message);
+        toast.error(result.error.message);
+        setLoading(false)
       } else {
         if (result.paymentIntent.status === "succeeded") {
-          alert("Payment Successful 🎉");
+          toast.success("Payment Successful 🎉");
           await API.post(`/appointment/change-book-status/${appointmentId}`);
           navigate("/my-appointments");
         }
@@ -32,7 +34,7 @@ const CheckoutForm = ({ appointmentId, fees }) => {
     } catch (error) {
       console.error("Payment error:", error);
       setLoading(false);
-      alert("Payment failed. Please try again.");
+      toast.error("Payment failed. Please try again.");
     }
   };
 
@@ -58,7 +60,6 @@ const CheckoutForm = ({ appointmentId, fees }) => {
       ) : (
         <button
           type="submit"
-          disabled={!stripe}
           className="w-full bg-gray-300 text-black py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
         >
           Pay ${fees}

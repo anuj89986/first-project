@@ -23,7 +23,6 @@ const DocHome = () => {
   }, []);
 
   const myApp = allAppointments.filter((item) => item.doctor?._id === docPanel?._id);
-  console.log(myApp)
   const todayApp = myApp.filter((item) => {
     const appointmentDate = new Date(item.date).toDateString();
     const today = new Date().toDateString();

@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import API from "../../config/API.js";
 import { useState } from "react";
+import { toast } from 'react-toastify';
 
 
 const AddDoctor = () => {
@@ -10,7 +11,6 @@ const AddDoctor = () => {
 
   const onSubmit = async (data) => {
     setLoading(true)
-    console.log(data);
     try {
       const formData = new FormData();
       formData.append("name", data.DoctorName);
@@ -21,7 +21,7 @@ const AddDoctor = () => {
       formData.append("speciality", data.Specialization);
       formData.append("about",data.About);
       const res = await API.post("/admin/register-doctor", formData);
-      alert("Doctor added successfully");
+      toast.success("Doctor added successfully");
       reset()
       setLoading(false);
     } catch (error) {

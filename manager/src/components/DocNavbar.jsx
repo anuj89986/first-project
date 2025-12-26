@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import API from "../../config/API";
 import { DocContext } from "../context/DocContext";
+import { toast } from 'react-toastify';
 const DocNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const {setDocPanel} = useContext(DocContext)
@@ -10,7 +11,7 @@ const DocNavbar = () => {
   const handleLogout = async () => {
     try {
       await API.post('doctor/logout')
-      alert("logout succesfull")
+      toast.success("logout succesfull")
       setDocPanel(null)
     } catch (error) {
       console.log(error)

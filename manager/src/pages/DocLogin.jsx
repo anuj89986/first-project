@@ -5,6 +5,7 @@ import { DocContext } from "../context/DocContext";
 import { AdminContext } from "../context/AdminContext";
 import { useNavigate } from "react-router-dom";
 import API from "../../config/API";
+import { toast } from 'react-toastify';
 
 const DocLogin = () => {
   const { docPanel, setDocPanel } = useContext(DocContext);
@@ -14,16 +15,16 @@ const DocLogin = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     try {
-      console.log(data.email, data.password);
       const res = await API.post("/doctor/login", {
         email: data.email,
         password: data.password,
       });
-      alert("login Successfull");
+      toast.success("login Successfull");
       setDocPanel(res.data.data);
       navigate("/");
     } catch (error) {
       console.log(error);
+      toast.error('Login Failed !')
     }
   };
   return (

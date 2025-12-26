@@ -4,6 +4,7 @@ import { AppContext } from "../context/AppContext";
 import RelatedDoctor from "../components/RelatedDoctor";
 import API from "../../config/API";
 import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Appointment = () => {
   const { docId } = useParams();
@@ -111,7 +112,7 @@ const Appointment = () => {
       navigate("/my-appointments");
     } catch (error) {
       console.log(error);
-      alert(error.response?.data?.message || "Failed to book appointment");
+      toast.error(error.response?.data?.message || "Failed to book appointment");
     }
   };
 

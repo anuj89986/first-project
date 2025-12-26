@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import API from '../../config/API'
+import { toast } from 'react-toastify'
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault()
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match')
+      toast.error('Passwords do not match')
       return
     }
     setLoading(true)
@@ -34,9 +35,9 @@ const SignUp = () => {
         password: formData.password
       })
       navigate('/login')
-      alert('Sign up successful! Please login.')
+      toast.success('Sign up successful! Please login.')
     } catch (error) {
-      alert('Sign up failed')
+      toast.error('Sign up failed')
     } finally {
       setLoading(false)
     }

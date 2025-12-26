@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { AdminContext } from "../context/AdminContext";
 import API from "../../config/API";
 import { DocContext } from "../context/DocContext";
+import { toast } from 'react-toastify';
 
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ const AdminSidebar = () => {
 
   const handleLogout = async () => {
     await API.post("/admin/logout");
-    alert("logout Successfull");
+    toast.success("logout Successfull");
     setAdmin(null);
   };
 

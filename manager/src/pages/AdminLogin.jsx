@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { AdminContext } from "../context/AdminContext";
 import { useNavigate } from "react-router-dom";
 import API from "../../config/API";
+import { toast } from 'react-toastify';
 
 const AdminLogin = () => {
 const {admin,setAdmin, setAdminLogin} = useContext(AdminContext)
@@ -12,16 +13,16 @@ const navigate = useNavigate()
   const { register, handleSubmit } = useForm();
   const onSubmit = async(data) =>{
     try {
-        console.log(data.username,data.password)
         const res = await API.post('/admin/login',{
             username:data.username,
             password:data.password
         })
-        alert("login Successfull")
+        toast.success("login Successfull")
         setAdmin(res.data.data)
         navigate('/')
     } catch (error) {
         console.log(error)
+        toast.error("Error in logging in")
     }
   } ;
   return (

@@ -12,7 +12,6 @@ const Appointments = () => {
     const getData = async () => {
       try {
         const app = await API.get("/appointment/all-appointments");
-        console.log(app.data.data);
         setAllAppointments(app.data.data);
       } catch (error) {
         console.log(error);
@@ -29,7 +28,6 @@ const Appointments = () => {
       console.log(error);
     }
   };
-  console.log(allAppointments);
 
   return (
     <main className="min-h-screen w-full bg-gray-50">

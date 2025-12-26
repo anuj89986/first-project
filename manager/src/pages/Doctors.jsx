@@ -2,7 +2,7 @@ import React from 'react'
 import { useContext } from 'react'
 import { DocContext } from '../context/DocContext'
 import API from '../../../frontend/config/API'
-import { useEffect } from 'react'
+import { toast } from 'react-toastify';
 
 const Doctors = () => {
   const {doctors,setDoctors} = useContext(DocContext)
@@ -11,11 +11,11 @@ const Doctors = () => {
   const handleDelete = async(docId)=>{
     try {
       await API.patch(`/admin/remove-doc/${docId}`)
-      alert('doctor removed Successfully')
+      toast.success('doctor removed Successfully')
       setDoctors((prev)=>prev.filter(item=>item._id!==docId))
     } catch (error) {
       console.log(error)
-      alert('error in removing doctor')
+      toast.error('error in removing doctor')
     }
   }
 

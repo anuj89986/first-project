@@ -3,6 +3,7 @@ import API from "../../config/API";
 
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const MyProfile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -37,9 +38,8 @@ const MyProfile = () => {
         dob: userData.birthday,
       });
       setUser({ ...user, ...userData });
-      console.log(res.data)
     } catch (error) {
-      alert(error)
+      toast.error(error)
     }
   };
 

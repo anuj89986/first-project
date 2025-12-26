@@ -96,7 +96,6 @@ const getDoctor = asyncHandler(async (req, res) => {
   if (!_id) {
     throw new ApiError(401, "Error in getting the id info!");
   }
-  console.log(_id);
 
   const reqDoc = await Doctor.findById(_id);
   if (!reqDoc) {

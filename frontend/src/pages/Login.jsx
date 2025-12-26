@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import API from "../../config/API";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-
+import { toast } from 'react-toastify';
 const Login = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
@@ -21,11 +21,11 @@ const Login = () => {
         email: data.email,
         password: data.password,
       });
-      alert("Login Successful");
+      toast.success("Login Successful");
       setUser(res.data.data);
       navigate("/");
     } catch (error) {
-      alert(error.response?.data?.message || "login failed");
+      toast.error(error.response?.data?.message || "login failed");
     }
   };
   const redirectToOtherSite = () => {

@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { useParams } from 'react-router-dom';
 import API from '../../config/API';
+import { toast } from 'react-toastify';
 
 const AppE = () => {
     const [allAppointments, setAllAppointments] = useState([]);
@@ -13,7 +14,6 @@ const AppE = () => {
     const getData = async () => {
       try {
         const app = await API.get("/appointment/all-appointments");
-        console.log(app.data.data);
         setAllAppointments(app.data.data);
       } catch (error) {
         console.log(error);
@@ -23,7 +23,6 @@ const AppE = () => {
   }, []);
 
   const requiredApp = allAppointments.filter((app)=>app._id===appointmentId)
-  console.log(requiredApp)
 
     const {
     register,
@@ -40,10 +39,10 @@ const AppE = () => {
         medicine : data.medicine
       }
     )
-    alert("submitted Succesfully")
+    toast.success("submitted Succesfully")
     } catch (error) {
       console.log(error)
-      alert("submittion failed")
+      toast.error("submittion failed")
     }
   }
 

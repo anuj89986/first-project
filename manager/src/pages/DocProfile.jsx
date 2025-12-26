@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import API from "../../config/API";
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
 
 const DocProfile = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -60,7 +61,7 @@ const DocProfile = () => {
       }
 
       await API.post("/doctor/update-doc", formData);
-      alert("saved successfully");
+      toast.success("saved successfully");
       setIsEdit(false);
       
       const res = await API.get("/doctor/doc-info");
@@ -68,7 +69,7 @@ const DocProfile = () => {
       setLoading(false);
     } catch (error) {
       console.log(error);
-      alert("not saved");
+      toast.error("not saved");
       setLoading(false);
     }
   };
