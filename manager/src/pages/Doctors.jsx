@@ -1,7 +1,7 @@
 import React from 'react'
 import { useContext } from 'react'
 import { DocContext } from '../context/DocContext'
-import API from '../../../frontend/config/API'
+import API from '../../config/API'
 import { toast } from 'react-toastify';
 
 const Doctors = () => {
