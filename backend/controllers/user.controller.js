@@ -36,7 +36,8 @@ const registerUser = asyncHandler(async (req, res) => {
   if (!createdUser) {
     throw new ApiError(500, "Unable to create user");
   }
-  const token = generateAccessToken(user._id);
+  
+  const token = await generateAccessToken(user._id); // Added await
 
   const option = {
     httpOnly: true,
@@ -68,7 +69,7 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Enter correct password");
   }
 
-  const token = generateAccessToken(user._id);
+  const token = await generateAccessToken(user._id); // Added await
 
   const loggedInUser = await User.findById(user._id).select("-password");
 
