@@ -34,9 +34,7 @@ function App() {
         setDocPanel(doc.data.data);
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
-      }
+      } 
       try {
         const res = await API.get("/admin/check-auth");
         setAdmin(res.data.data);
@@ -44,9 +42,8 @@ function App() {
         setDoctors(allDoc.data.data);
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
       }
+      setLoading(false)
     };
 
     checkAuth();
@@ -70,7 +67,6 @@ function App() {
               <Route path="/addDoctor" element={<AddDoctor />} />
               <Route path="/appointments" element={<Appointments />} />
               <Route path="/doctors" element={<Doctors />} />
-              const isLoggedIn = Boolean(localStorage.getItem("token"))
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>
