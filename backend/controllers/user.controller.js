@@ -4,7 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import "dotenv/config";
 
-const generateAccessToken = (id) => {
+const generateAccessToken = async (id) => {
   try {
     const user = await User.findById(id);
     const accessToken = user.generateAccessToken();
