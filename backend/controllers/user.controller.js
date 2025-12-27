@@ -4,7 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import "dotenv/config";
 
-const generateAccessToken = async (id) => {
+const generateAccessToken = (id) => {
   try {
     const user = await User.findById(id);
     const accessToken = user.generateAccessToken();
@@ -41,6 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const option = {
     httpOnly: true,
     secure: true,
+    sameSite: 'none'
   };
 
   res
