@@ -154,7 +154,7 @@ const DocAppointments = () => {
               >
                 <div className="mb-4 flex justify-center">
                   <img
-                    src="./public/profile.png"
+                    src="/profile.png"
                     alt="Patient"
                     className="h-20 w-20 rounded-full object-cover ring-2 ring-gray-100"
                   />
