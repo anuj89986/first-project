@@ -4,22 +4,24 @@ import { ApiError } from "../utils/ApiError.js";
 import Admin from "../models/admin.model.js";
 
 export const adminAuth = asyncHandler(async (req, res, next) => {   
-  const token = req.cookies.adminToken;
+  const token = req.cookies?.adminToken;
   
   if (!token){
-    throw new ApiError(400, "Authorization failed!! in admin");
-  }
-  const verifiedToken = jwt.verify(token, process.env.ADMIN_ACCESS_TOKEN_SECRET);
-
-  if (!verifiedToken) {
-    throw new ApiError(400, "Login required!!");
+    throw new ApiError(401, "Admin authentication required");
   }
 
-  const admin = await Admin.findById(verifiedToken._id).select("-password");
-  if (!admin) {
-    throw new ApiError(400, "Invalid access token");
-  }
+  try {
+    const verifiedToken = jwt.verify(token, process.env.ADMIN_ACCESS_TOKEN_SECRET);
 
-  req.admin = admin;
-  next();
+    const admin = await Admin.findById(verifiedToken._id).select("-password");
+    
+    if (!admin) {
+      throw new ApiError(401, "Invalid admin access token");
+    }
+
+    req.admin = admin;
+    next();
+  } catch (error) {
+    throw new ApiError(401, "Invalid or expired admin token");
+  }
 });
